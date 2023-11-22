@@ -86,5 +86,6 @@ Quaisquer outras informações sobre o projeto podem ser descritas aqui. Não es
 (iV) Trabalhos Futuros.
 
 ## Fontes
-Referencie, adequadamente, as referências utilizadas.
-Indique ainda sobre fontes de leitura complementares.
+
+- https://www.ndemiccreations.com/en/22-plague-inc
+- http://www.covid.bio.br
