@@ -1,7 +1,5 @@
 # MESA INC
 
-# NomeDoProjeto
-
 **Disciplina**: FGA0210 - PARADIGMAS DE PROGRAMAÇÃO - T01 <br>
 **Nro do Grupo (de acordo com a Planilha de Divisão dos Grupos)**: G4<br>
 **Paradigma**: Sistema Multi Agentes<br>
