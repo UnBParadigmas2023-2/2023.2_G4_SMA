@@ -56,3 +56,36 @@ class DiseaseModel(Model):
 
     def is_urban_area(self, pos):
         return pos in self.urban_areas
+    
+    def initialize_cell_info(self):
+        # Define as informações para cada célula
+        info = {}
+        for x in range(self.grid.width):
+            for y in range(self.grid.height):
+                # Define a profundidade e qualidade da água para cada célula
+                # Exemplo: profundidade varia de 1 a 3 e qualidade da água varia entre "Clean", "Murky" e "Polluted"
+                depth = random.choice(["Shallow", "Medium", "Deep"])
+                water_quality = random.choice(["Clean", "Murky", "Polluted"])
+                info[(x, y)] = (depth, water_quality)
+        return info
+
+    def get_cell_info(self, pos):
+        # Retorna as informações da célula para a posição dada
+        return self.cell_info.get(pos, (None, None))
+    
+    def step(self):
+        self.schedule.step()
+        self.print_summary()
+
+    def print_summary(self):
+        # Exemplo de função para imprimir um resumo após cada passo
+        num_people = sum(1 for a in self.schedule.agents if isinstance(a, Person))
+        num_land_animals = sum(1 for a in self.schedule.agents if isinstance(a, LandAnimal))
+        num_flying_animals = sum(1 for a in self.schedule.agents if isinstance(a, FlyingAnimal))
+        num_aquatic_animals = sum(1 for a in self.schedule.agents if isinstance(a, AquaticAnimal))
+
+        print(f"Passo {self.schedule.steps}:")
+        print(f"  Pessoas: {num_people}")
+        print(f"  Animais Terrestres: {num_land_animals}")
+        print(f"  Animais Voadores: {num_flying_animals}")
+        print(f"  Animais Aquáticos: {num_aquatic_animals}")
