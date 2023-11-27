@@ -38,3 +38,21 @@ class DiseaseModel(Model):
         y = self.random.randrange(self.grid.height)
         self.grid.place_agent(agent, (x, y))
         self.schedule.add(agent)
+
+    def initialize_urban_areas(self, width, height):
+        # Aqui você pode definir as áreas urbanas
+        # Por exemplo, você pode definir uma porcentagem das células como urbanas
+        urban_area_percentage = 0.2  # 20% das células
+        total_cells = width * height
+        num_urban_cells = int(total_cells * urban_area_percentage)
+
+        urban_cells = set()
+        while len(urban_cells) < num_urban_cells:
+            x = random.randrange(width)
+            y = random.randrange(height)
+            urban_cells.add((x, y))
+
+        return urban_cells
+
+    def is_urban_area(self, pos):
+        return pos in self.urban_areas
