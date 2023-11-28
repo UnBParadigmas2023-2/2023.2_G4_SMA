@@ -14,6 +14,14 @@ def agent_portrayal(agent):
     # Definir a cor do agente
     if isinstance(agent, Person):
         portrayal["Color"] = "red"
+
+        # Adicionar indicação de saúde
+        portrayal["Saude"] = agent.health
+
+        # Verificar se o agente está infectado
+        if agent.disease:
+            portrayal["Color"] = "purple"  # Cor para agentes infectados
+            portrayal["Saude"] += f" | Infecção: {agent.disease.name}"
     elif isinstance(agent, LandAnimal):
         portrayal["Color"] = "green"
     elif isinstance(agent, FlyingAnimal):

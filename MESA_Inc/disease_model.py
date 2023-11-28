@@ -1,7 +1,7 @@
 from mesa import Model
 from mesa.space import MultiGrid
 from mesa.time import RandomActivation
-from agents import Person, LandAnimal, FlyingAnimal, AquaticAnimal
+from agents import *
 import random
 
 class DiseaseModel(Model):
@@ -13,9 +13,12 @@ class DiseaseModel(Model):
         self.urban_areas = self.initialize_urban_areas(width, height)
         self.cell_info = self.initialize_cell_info()
 
-        # Cria pessoas
+        # Cria pessoas com alguns agentes infectados com COVID-19
         for i in range(num_people):
-            a = Person(i, self)
+            if i < num_people * 0.2:  # Por exemplo, 20% das pessoas inicialmente infectadas
+                a = Person(i, self, disease=covid19)
+            else:
+                a = Person(i, self)
             self.place_agent_randomly(a)
 
         # Cria animais terrestres

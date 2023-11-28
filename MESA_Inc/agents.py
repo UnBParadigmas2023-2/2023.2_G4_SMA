@@ -1,15 +1,23 @@
 from mesa import Agent
 import random
 
+class Disease:
+    def __init__(self, name, transmission_rate, incubation_period, severity):
+        self.name = name
+        self.transmission_rate = transmission_rate
+        self.incubation_period = incubation_period
+        self.severity = severity
+
 class Person(Agent):
-    def __init__(self, unique_id, model):
+    def __init__(self, unique_id, model, disease=None):
         super().__init__(unique_id, model)
         self.age = random.randint(0, 100)
-        self.health = random.choice(["Good", "Average", "Poor"])
+        self.health = random.choice(["Boa", "Média", "Ruim"])
         self.mobility = random.choice(["High", "Medium", "Low"])
         self.occupation = random.choice(["Student", "Worker", "Retired"])
         self.vaccinated = random.choice([True, False])
         self.social_behaviour = random.choice(["Social", "Reserved"])
+        self.disease = disease  # Adicionando a referência à doença
 
     def move(self):
         possible_steps = self.model.grid.get_neighborhood(
@@ -156,5 +164,6 @@ class AquaticAnimal(Agent):
 
     def step(self):
         self.move()  # Movimentação do agente a cada etapa
-
-
+covid19 = Disease(name="COVID-19", transmission_rate=0.3, incubation_period=14, severity="Severe")
+influenza = Disease(name="Influenza", transmission_rate=0.2, incubation_period=7, severity="Moderate")
+common_cold = Disease(name="Gripe", transmission_rate=0.1, incubation_period=5, severity="Mild")
