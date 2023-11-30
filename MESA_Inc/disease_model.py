@@ -39,8 +39,11 @@ class DiseaseModel(Model):
     def place_agent_randomly(self, agent):
         x = self.random.randrange(self.grid.width)
         y = self.random.randrange(self.grid.height)
-        self.grid.place_agent(agent, (x, y))
-        self.schedule.add(agent)
+        if self.grid.is_cell_empty((x, y)):
+            self.grid.place_agent(agent, (x, y))
+            self.schedule.add(agent)
+
+        
 
     def initialize_urban_areas(self, width, height):
         # Aqui você pode definir as áreas urbanas
