@@ -2,11 +2,12 @@ from mesa import Agent
 import random
 
 class Disease:
-    def __init__(self, name, transmission_rate, incubation_period, severity):
+    def __init__(self, name, transmission_rate, incubation_period, severity, causer):
         self.name = name
         self.transmission_rate = transmission_rate
         self.incubation_period = incubation_period
         self.severity = severity
+        self.causer = causer
 
 class Person(Agent):
     def __init__(self, unique_id, model, disease=None):
@@ -164,6 +165,9 @@ class AquaticAnimal(Agent):
 
     def step(self):
         self.move()  # Movimentação do agente a cada etapa
-covid19 = Disease(name="COVID-19", transmission_rate=0.3, incubation_period=14, severity="Severe")
-influenza = Disease(name="Influenza", transmission_rate=0.2, incubation_period=7, severity="Moderate")
-common_cold = Disease(name="Gripe", transmission_rate=0.1, incubation_period=5, severity="Mild")
+covid19 = Disease(name="COVID-19", transmission_rate=0.3, incubation_period=14, severity="Severe", causer="virus")
+influenza = Disease(name="Influenza", transmission_rate=0.2, incubation_period=7, severity="Moderate", causer="virus")
+common_cold = Disease(name="Gripe", transmission_rate=0.1, incubation_period=5, severity="Mild", causer="virus")
+coqueluche = Disease(name="Coqueluche", transmission_rate=0.8, incubation_period=14, severity="Severe", causer="bacterium")
+hanseniase = Disease(name="Hanseníase", transmission_rate=0.24 ,incubation_period=730, severity="Moderate", causer="bacterium")
+conjuntivite = Disease(name="Conjuntivite", transmission_rate=0.08 ,incubation_period=15, severity="Mild", causer="virus")
