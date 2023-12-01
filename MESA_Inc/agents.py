@@ -170,4 +170,4 @@ influenza = Disease(name="Influenza", transmission_rate=0.2, incubation_period=7
 common_cold = Disease(name="Gripe", transmission_rate=0.1, incubation_period=5, severity="Mild", causer="virus")
 coqueluche = Disease(name="Coqueluche", transmission_rate=0.8, incubation_period=14, severity="Severe", causer="bacterium")
 hanseniase = Disease(name="Hanseníase", transmission_rate=0.24 ,incubation_period=730, severity="Moderate", causer="bacterium")
-conjuntivite = Disease(name="Conjuntivite", transmission_rate=0.08 ,incubation_period=15, severity="Mild", causer="virus")
+conjuntivite = Disease(name="conjuntivite", transmission_rate=0.08 ,incubation_period=15, severity="Mild", causer="virus")
