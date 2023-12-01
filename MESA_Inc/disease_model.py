@@ -13,28 +13,43 @@ class DiseaseModel(Model):
         self.urban_areas = self.initialize_urban_areas(width, height)
         self.cell_info = self.initialize_cell_info()
 
-        # Cria pessoas com alguns agentes infectados com COVID-19
-        for i in range(num_people):
-            if i < num_people * 0.15:  # Por exemplo, 15% das pessoas inicialmente infectadas
-                a = Person(i, self, disease=covid19)
-            else:
-                a = Person(i, self)
-            self.place_agent_randomly(a)
+        start_unique_id = 0
+        start_unique_id = self.initial_infected_people(num_people, covid19, 0.15, start_unique_id)
+        start_unique_id = self.initial_infected_people(num_people, influenza, 0.1, start_unique_id)
+        start_unique_id = self.initial_infected_people(num_people, common_cold, 0.3, start_unique_id)
+        start_unique_id = self.initial_infected_people(num_people, coqueluche, 0.01, start_unique_id)
+        start_unique_id = self.initial_infected_people(num_people, hanseniase, 0.03, start_unique_id)
+        start_unique_id = self.initial_infected_people(num_people, conjuntivite, 0.05, start_unique_id)
 
         # Cria animais terrestres
         for i in range(num_people, num_people + num_land_animals):
-            a = LandAnimal(i, self)
+            a = LandAnimal(start_unique_id, self)
+            start_unique_id += 1
             self.place_agent_randomly(a)
 
         # Cria animais voadores
         for i in range(num_people + num_land_animals, num_people + num_land_animals + num_flying_animals):
-            a = FlyingAnimal(i, self)
+            a = FlyingAnimal(start_unique_id, self)
+            start_unique_id += 1
             self.place_agent_randomly(a)
 
         # Cria animais aquáticos
         for i in range(num_people + num_land_animals + num_flying_animals, num_people + num_land_animals + num_flying_animals + num_aquatic_animals):
-            a = AquaticAnimal(i, self)
+            a = AquaticAnimal(start_unique_id, self)
+            start_unique_id += 1
             self.place_agent_randomly(a)
+
+    def initial_infected_people(self, num_people, name_disease, percent_initial, start_unique_id):
+        for x in range(num_people):
+            unique_id = start_unique_id
+            start_unique_id += 1
+            if x < num_people * percent_initial:
+                a = Person(unique_id, self, disease=name_disease)
+            else:
+                a = Person(unique_id, self)
+            self.place_agent_randomly(a)
+
+        return start_unique_id
 
     def place_agent_randomly(self, agent):
         x = self.random.randrange(self.grid.width)
