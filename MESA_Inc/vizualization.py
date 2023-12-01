@@ -69,26 +69,27 @@ model_params = {
         value=5,
     ),
     "num_flying_animals": mesa.visualization.Slider(
-        name="Número de Animais Terrestres",
+        name="Número de Animais Voadores",
         min_value=0,
         max_value=20,
         step=1,
         value=5,
     ),
     "num_aquatic_animals": mesa.visualization.Slider(
-        name="Número de Animais Terrestres",
+        name="Número de Animais Aquáticos",
         min_value=0,
         max_value=10,
         step=1,
         value=5,
     ),
-    "width": 15,
-    "height": 15,
+    "width": 10,
+    "height": 10,
 }
 
-server = ModularServer(DiseaseModel, [grid, chart, agents_chart], "Disease Spread Simulation", model_params)
-                    #    {"num_people": 50, "num_land_animals": 30, "num_flying_animals": 20, "num_aquatic_animals": 10, "width": 10, "height": 10})
-
+server = ModularServer(DiseaseModel,
+                       [grid, chart, agents_chart],
+                       "Disease Spread Simulation",
+                       model_params)
 server.port = 8000
 
 server.launch()
