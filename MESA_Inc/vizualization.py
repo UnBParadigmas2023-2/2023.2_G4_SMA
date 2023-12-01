@@ -1,5 +1,5 @@
 from mesa.visualization.ModularVisualization import ModularServer
-from mesa.visualization.modules import CanvasGrid
+from mesa.visualization.modules import CanvasGrid, ChartModule, BarChartModule
 from disease_model import DiseaseModel
 from agents import Person, LandAnimal, FlyingAnimal, AquaticAnimal  # Importa as classes dos agentes
 
@@ -41,8 +41,19 @@ def agent_portrayal(agent):
 
 grid = CanvasGrid(agent_portrayal, 10, 10, 500, 500)
 
+# Define um ChartModule para vizualização
+chart = ChartModule([{"Label": "Total de Infectados", "Color": "red"}],
+                    data_collector_name='datacollector')
+
+agents_chart = BarChartModule([{"Label": "Total de Pessoas", "Color": "black"},
+                            {"Label": "Total de Animais Terrestres", "Color": "brown"},
+                            {"Label": "Total de Animais Voadores", "Color": "blue"},
+                            {"Label": "Total de Animais Aquáticos", "Color": "orange"}
+                            ],
+                    data_collector_name='agents_datacollector', canvas_width= 700)
+
 server = ModularServer(DiseaseModel,
-                       [grid],
+                       [grid, chart, agents_chart],
                        "Disease Spread Simulation",
                        {"num_people": 50, "num_land_animals": 30, "num_flying_animals": 20, "num_aquatic_animals": 10, "width": 10, "height": 10})
 server.port = 8000

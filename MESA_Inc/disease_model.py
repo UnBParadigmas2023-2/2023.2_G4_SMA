@@ -1,8 +1,36 @@
 from mesa import Model
+from mesa.datacollection import DataCollector
 from mesa.space import MultiGrid
 from mesa.time import RandomActivation
 from agents import *
 import random
+
+# Começo das funções de DataCollector
+
+def get_total_num_person(model):
+    # Checa quantas pessoas existem no total
+    num_people = sum(1 for a in model.schedule.agents if isinstance(a, Person))
+    return num_people
+
+def get_total_num_land_animal(model):
+    # Checa quantos animais terrestres existem no total
+    num_land_animals = sum(1 for a in model.schedule.agents if isinstance(a, LandAnimal))
+    return num_land_animals
+
+def get_total_num_flying_animals(model):
+    # Checa quantos animais voadores existem no total
+    num_flying_animals = sum(1 for a in model.schedule.agents if isinstance(a, FlyingAnimal))
+    return num_flying_animals
+
+def get_total_num_aquatic_animals(model):
+    # Checa quantos animais aquáticos existem no total
+    num_aquatic_animals = sum(1 for a in model.schedule.agents if isinstance(a, AquaticAnimal))
+    return num_aquatic_animals
+
+def get_num_infected_person(model):
+    # Checa quantas pessoas estão infectadas por qualquer doença
+    infected_agents = [a for a in model.schedule.agents if isinstance(a, Person) and a.disease]
+    return len(infected_agents)
 
 class DiseaseModel(Model):
     def __init__(self, num_people, num_land_animals, num_flying_animals, num_aquatic_animals, width, height):
@@ -38,6 +66,22 @@ class DiseaseModel(Model):
             a = AquaticAnimal(start_unique_id, self)
             start_unique_id += 1
             self.place_agent_randomly(a)
+
+        # Inicializa um Data Collector
+        self.datacollector = DataCollector(
+            model_reporters={
+                "Total de Infectados": get_num_infected_person
+            },
+        )
+
+        self.agents_datacollector = DataCollector(
+            model_reporters={
+                "Total de Pessoas": get_total_num_person,
+                "Total de Animais Terrestres": get_total_num_land_animal,
+                "Total de Animais Voadores": get_total_num_flying_animals,
+                "Total de Animais Aquáticos": get_total_num_aquatic_animals,
+            },
+        )
 
     def initial_infected_people(self, num_people, name_disease, percent_initial, start_unique_id):
         for x in range(num_people):
@@ -95,18 +139,6 @@ class DiseaseModel(Model):
         return self.cell_info.get(pos, (None, None))
     
     def step(self):
+        self.datacollector.collect(self)
+        self.agents_datacollector.collect(self)
         self.schedule.step()
-        self.print_summary()
-
-    def print_summary(self):
-        # Exemplo de função para imprimir um resumo após cada passo
-        num_people = sum(1 for a in self.schedule.agents if isinstance(a, Person))
-        num_land_animals = sum(1 for a in self.schedule.agents if isinstance(a, LandAnimal))
-        num_flying_animals = sum(1 for a in self.schedule.agents if isinstance(a, FlyingAnimal))
-        num_aquatic_animals = sum(1 for a in self.schedule.agents if isinstance(a, AquaticAnimal))
-
-        print(f"Passo {self.schedule.steps}:")
-        print(f"  Pessoas: {num_people}")
-        print(f"  Animais Terrestres: {num_land_animals}")
-        print(f"  Animais Voadores: {num_flying_animals}")
-        print(f"  Animais Aquáticos: {num_aquatic_animals}")
