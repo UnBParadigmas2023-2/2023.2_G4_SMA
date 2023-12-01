@@ -5,30 +5,37 @@ from agents import Person, LandAnimal, FlyingAnimal, AquaticAnimal  # Importa as
 
 def agent_portrayal(agent):
     portrayal = {
-        "Shape": "circle",
         "Filled": "true",
-        "r": 0.5,
+        "scale": 0.7,
         "Layer": 1
     }
 
     # Definir a cor do agente
     if isinstance(agent, Person):
-        portrayal["Color"] = "red"
+        portrayal["Shape"] = f"./assets/person.png"
+
+        # Adicionar indicação de saúde
+        portrayal["Saude"] = agent.health
+
+        # Verificar se o agente está infectado
+        if agent.disease:
+            portrayal["Shape"] = f"./assets/{agent.disease.name}.png"
+            portrayal["Saude"] += f" | Infecção: {agent.disease.name}"
     elif isinstance(agent, LandAnimal):
-        portrayal["Color"] = "green"
+        portrayal["Shape"] = f"./assets/land.png"
     elif isinstance(agent, FlyingAnimal):
-        portrayal["Color"] = "blue"
+        portrayal["Shape"] = f"./assets/flying.png"
     elif isinstance(agent, AquaticAnimal):
-        portrayal["Color"] = "yellow"
+        portrayal["Shape"] = f"./assets/aquatic.png"
 
     # Verificar se o agente está em uma área urbana ou aquática
     cell_info = agent.model.get_cell_info(agent.pos)
     in_urban_area = agent.model.is_urban_area(agent.pos)
 
     if in_urban_area:
-        portrayal["Color"] = "pink"
+        portrayal["Shape"] = f"./assets/urban.png"
     elif cell_info and cell_info[0] in ["Shallow", "Medium", "Deep"]:
-        portrayal["r"] = 0.8  # Agentes em ambientes aquáticos são maiores
+        portrayal["scale"] = 0.8  # Agentes em ambientes aquáticos são maiores
 
     return portrayal
 
