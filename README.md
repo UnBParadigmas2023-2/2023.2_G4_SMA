@@ -42,7 +42,10 @@ Objetivo Geral: Desenvolver uma simulação interativa que modele a disseminaç�
 
 ## Screenshots
 
-  
+![WhatsApp Image 2023-12-03 at 15 00 31](https://github.com/UnBParadigmas2023-2/2023.2_G4_SMA/assets/78980842/f7b6becc-bde7-4935-b78d-c1c9ea97b1ea)
+
+![WhatsApp Image 2023-12-03 at 14 56 54](https://github.com/UnBParadigmas2023-2/2023.2_G4_SMA/assets/78980842/5d6f8476-afcd-46f0-8bf5-1aeeeaccb759)
+ 
 
 ## Instalação 
 **Linguagens**: Python<br>
