@@ -41,19 +41,25 @@ Objetivo Geral: Desenvolver uma simulação interativa que modele a disseminaç�
 - Aplicação de técnicas de análise de dados para identificar tendências e prever picos de infecção.
 
 ## Screenshots
-Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcionamento.
+
+  
 
 ## Instalação 
 **Linguagens**: Python<br>
 **Tecnologias**: MESA<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-Insira um manual ou um script para auxiliar ainda mais.
-Gifs animados e outras ilustrações são bem-vindos!
+
+você precisará instalar a biblioteca Mesa:
+
+  pip install mesa
 
 ## Uso 
-Explique como usar seu projeto.
-Procure ilustrar em passos, com apoio de telas do software, seja com base na interface gráfica, seja com base no terminal.
-Nessa seção, deve-se revelar de forma clara sobre o funcionamento do software.
+
+- Abra um terminal ou linha de comando no diretório do projeto.
+- Execute o script main.py que deve iniciar a simulação. Normalmente, isso é feito com o comando:
+
+  python main.py
+  
+Se a simulação incluir visualização baseada em navegador, o main.py ou visualization.py deve abrir uma janela do navegador ou fornecer um URL que você pode visitar para ver a simulação em ação.
 
 ## Vídeo
 Adicione 1 ou mais vídeos com a execução do projeto.
