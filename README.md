@@ -84,7 +84,7 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 | Josué Teixeira Santana | Implementado o tipo de doença (ex.: gripe, COVID-19) e suas características (taxa de transmissão, período de incubação, severidade) foram definidos, e o modelo de transmissão da doença entre os agentes. | Excelente |
 | Carla Rocha Cangussú | Implementado o tipo de doença (ex.: gripe, COVID-19) e suas características (taxa de transmissão, período de incubação, severidade) foram definidos, e o modelo de transmissão da doença entre os agentes e incrementos na interface| Excelente |
 | Juliana Pereira Valle Gonçalves | Coleta e análise de dados da simulação e desenvolvimento de ferramentas de visualização para a progressão da doença | Excelente |
-| Daniel Primo de Melo  |  | Excelente |
+| Daniel Primo de Melo  | Criação de uma interface interativa com o usuário para que possa colocar valores diferentes e ver as mudanças em tela.| Excelente |
 | Júlio César Martins frança |  | Excelente |
 
 ## Outros 
