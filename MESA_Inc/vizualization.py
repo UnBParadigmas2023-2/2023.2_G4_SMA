@@ -1,3 +1,4 @@
+import mesa
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import CanvasGrid, ChartModule, BarChartModule
 from disease_model import DiseaseModel
@@ -52,10 +53,43 @@ agents_chart = BarChartModule([{"Label": "Total de Pessoas", "Color": "black"},
                             ],
                     data_collector_name='agents_datacollector', canvas_width= 700)
 
+model_params = {
+    "num_people": mesa.visualization.Slider(
+        name="Número de Pessoas",
+        min_value=0,
+        max_value=50,
+        step=1,
+        value=5,
+    ),
+    "num_land_animals": mesa.visualization.Slider(
+        name="Número de Animais Terrestres",
+        min_value=0,
+        max_value=30,
+        step=1,
+        value=5,
+    ),
+    "num_flying_animals": mesa.visualization.Slider(
+        name="Número de Animais Voadores",
+        min_value=0,
+        max_value=20,
+        step=1,
+        value=5,
+    ),
+    "num_aquatic_animals": mesa.visualization.Slider(
+        name="Número de Animais Aquáticos",
+        min_value=0,
+        max_value=10,
+        step=1,
+        value=5,
+    ),
+    "width": 10,
+    "height": 10,
+}
+
 server = ModularServer(DiseaseModel,
                        [grid, chart, agents_chart],
                        "Disease Spread Simulation",
-                       {"num_people": 50, "num_land_animals": 30, "num_flying_animals": 20, "num_aquatic_animals": 10, "width": 10, "height": 10})
+                       model_params)
 server.port = 8000
 
 server.launch()

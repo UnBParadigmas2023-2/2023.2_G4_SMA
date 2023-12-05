@@ -87,7 +87,7 @@ class DiseaseModel(Model):
         for x in range(num_people):
             unique_id = start_unique_id
             start_unique_id += 1
-            if x < num_people * percent_initial:
+            if x < num_people * percent_initial * 0.01:
                 a = Person(unique_id, self, disease=name_disease)
             else:
                 a = Person(unique_id, self)
